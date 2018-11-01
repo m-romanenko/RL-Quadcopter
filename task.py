@@ -27,9 +27,13 @@ class Task():
         self.target_pos = target_pos if target_pos is not None else np.array([0., 0., 10.]) 
 
     def get_reward(self):
-        """Uses current pose of sim to return reward."""
-        reward = 1.-.3*(abs(self.sim.pose[:3] - self.target_pos)).sum()
-        return reward
+        """Uses current pose and velocity of sim to return reward."""
+        dist_reward = 5*self.sim.pose[2] - 2*np.abs(self.sim.pose[0] + self.sim.pose[1])
+        vel_reward = 5*self.sim.v[2] - 2*np.abs(self.sim.v[0] + self.sim.v[1])
+        reward = dist_reward + vel_reward
+        if self.sim.pose[2] >= self.target_pos[2]:
+            reward += 100    
+        return np.tanh(reward)
 
     def step(self, rotor_speeds):
         """Uses action to obtain next state, reward, done."""
