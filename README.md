@@ -2,7 +2,7 @@
 
 *Teach a Quadcopter How to Fly!*
 
-This project contains code that designs an agent that controls a quadcopter, and traisn it using the DDPG reinforcement learning algorithm. 
+This project contains code that designs an agent that controls a quadcopter, and trains it using the DDPG reinforcement learning algorithm. 
 
 
 ## References 
